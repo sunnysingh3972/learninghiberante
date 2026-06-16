@@ -1,0 +1,2 @@
+# Ignore Hibernate properties file
+src/main/resources/hibernate.properties
