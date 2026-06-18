@@ -1,11 +1,17 @@
 package com.hibernatelearning.Entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,6 +32,8 @@ public class Student {
     private boolean isActive=true;
     @Lob
     private String about;
+    @OneToMany(mappedBy="student",fetch=FetchType.LAZY,cascade=CascadeType.ALL,orphanRemoval=true)
+    private List<Certicate> certificates =new ArrayList<>();
     public int getStudentId() {
         return StudentId;
     }
@@ -72,6 +80,12 @@ public class Student {
     public String toString() {
         return "Student [StudentId=" + StudentId + ", name=" + name + ", college=" + college + ", phone=" + phone
                 + ", email=" + email + ", isActive=" + isActive + ", about=" + about + "]";
+    }
+    public List<Certicate> getCertificates() {
+        return certificates;
+    }
+    public void setCertificates(List<Certicate> certificates) {
+        this.certificates = certificates;
     }
     
     
